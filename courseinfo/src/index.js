@@ -1,13 +1,67 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 
+const Header = (props) => {
+  return(
+    <div>
+      <h1>{props.headerText}</h1>
+    </div>
+  )
+}
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+const Content = (props) => {
+  return(
+    <div>
+      <Part part={props.parts[0]} />
+      <Part part={props.parts[1]} />
+      <Part part={props.parts[2]} />
+    </div>
+  )
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+const Part = (props) => {
+  return (
+    <p>
+      {props.part.name} {props.part.exercises}
+    </p>
+  )
+}
+
+const Total = (props) => {
+  return(
+    <p>
+      Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}
+    </p>
+  )
+}
+
+const App = () => {
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
+      
+  return (
+    <div>
+      <Header headerText={course.name} />
+      <Content parts={course.parts}/>
+      <Total parts={course.parts} />
+    </div>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+
